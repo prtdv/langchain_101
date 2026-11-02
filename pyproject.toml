@@ -1,0 +1,21 @@
+[project]
+name = "langchain-101"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "prtdv@unboundia", email = "pdev@unboundia.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "langchain>=1.4.7",
+    "langchain-google-genai>=4.4.2",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+langchain-101 = "langchain_101:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
