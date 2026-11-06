@@ -27,7 +27,7 @@ promptWithRoles = ChatPromptTemplate.from_messages(
 
 prompt_values = promptWithRoles.invoke(
     {"role": "python instructor", "tone": "aggressive", "topic": "recursion"}
-)
+)  # returns messages
 
 print(prompt_values)
 
