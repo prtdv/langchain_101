@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 from langchain.tools import tool
-from langchain_core.messages import HumanMessage, ToolMessage
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import ToolMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 load_dotenv()
@@ -30,7 +29,7 @@ def divide(a: int, b: int) -> int:
 
 
 model_w_tools = model.bind_tools([multiply, divide])
-# Tells gemini of all available tools through a list of tools. You can request that my application execute them.
+# bind_tools tells the model: "You have access to these functions. Call them if you need external info or math, but if you have the answer, just respond normally."
 # .bind_tools() accepts LangChain tools, Python callables and supported schemas
 
 messages = [("human", "what's 110/12?")]
@@ -45,6 +44,8 @@ tool_call = response.tool_calls[0]
 tool = tool_call["name"]
 
 # gemini only figures out which tool to use and which args to use from the prompt. we have to execute our function manually.
+
+# tool calling
 match tool:
     case "multiply":
         tool_result = multiply.invoke(tool_call["args"])
