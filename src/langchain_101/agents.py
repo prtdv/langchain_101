@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from httpcore import stream
 from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -29,7 +30,7 @@ def add(a: int, b: int) -> int:
 @tool
 def subtract(a: int, b: int) -> int:
     "take 2 input ints. return the difference of the given 2 inputs"
-    return b - a
+    return a - b
 
 
 agent = create_agent(
@@ -44,16 +45,21 @@ agent = create_agent(
     ),
 )
 
-result = agent.invoke(
-    {"messages": [{"role": "user", "content": "what is (14 + 9) * 3?"}]}
-)
+inputs = {"messages": [{"role": "user", "content": "what is ((25+15)-10)2"}]}
+
+result = agent.invoke(inputs)
 
 print(result["messages"][-1].content[0]["text"])
 
-# internal
+# internal working, HumanMessage -> AIMessage -> ToolMessage -> AIMessage -> ToolMessage ->....-> AIMessage (STOP), loop
 for message in result["messages"]:
     print("\n", type(message).__name__)
     print(message.content)
 
     if getattr(message, "tool_calls", None):
         print("Tool calls:", message.tool_calls)
+
+
+# checking each step the agent takes in real time.
+for update in agent.stream(inputs, stream_mode="updates"):
+    print(update)
