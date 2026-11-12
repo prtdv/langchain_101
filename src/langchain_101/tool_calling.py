@@ -14,25 +14,25 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 
+# print(multiply.name)  # multiply
+# print(multiply.description)  # Multiply 2 numbers and return their product
+# print(multiply.args)  # {'a': {'title': 'A', 'type': 'integer'}, 'b': {'title': 'B', 'type': 'integer'}}
+
+
 @tool
 def divide(a: int, b: int) -> int:
     """divide 2 numbers and return their product"""
     return a // b
 
 
-# print(multiply.name)  # multiply
-# print(multiply.description)  # Multiply 2 numbers and return their product
-# print(multiply.args)  # {'a': {'title': 'A', 'type': 'integer'}, 'b': {'title': 'B', 'type': 'integer'}}
-
-# result = multiply.invoke({"a": 10, "b": 50})
-# print(result) #500
+# result = multiply.invoke({"a": 10, "b": 50}) #print(result) #500
 
 
 model_w_tools = model.bind_tools([multiply, divide])
 # bind_tools tells the model: "You have access to these functions. Call them if you need external info or math, but if you have the answer, just respond normally."
 # .bind_tools() accepts LangChain tools, Python callables and supported schemas
 
-messages = [("human", "what's 110/12?")]
+messages = [("human", "what's 110*12?")]
 
 response = model_w_tools.invoke(messages)
 print(
