@@ -16,7 +16,6 @@ loader = DoclingLoader(
 documents = loader.load()
 
 print(f"documents loaded: {len(documents)}")
-
 for doc in documents:
     print(doc.page_content)
     print(doc.metadata)
