@@ -7,8 +7,7 @@ documents = [
         page_content="""
                 Employees are entitled to 20 days of annual leave.
 
-                Employees may carry forward a maximum of
-                10 unused days to the next calendar year.
+                Employees may carry forward a maximum of 10 unused days to the next calendar year.
 
                 Sick leave is limited to 12 days annually.
                 """,
@@ -19,7 +18,9 @@ documents = [
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=100, chunk_overlap=20, add_start_index=True
+    chunk_size=100,
+    chunk_overlap=20,
+    add_start_index=True,  # Adds the chunk's starting character position to metadata
 )
 
 chunks = splitter.split_documents(documents)
