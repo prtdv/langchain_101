@@ -20,3 +20,8 @@ print(f"documents loaded: {len(documents)}")
 for doc in documents:
     print(doc.page_content)
     print(doc.metadata)
+
+
+# - load() loads the documents and returns a list.
+# - lazy_load() yields documents one at a time, which is useful for larger datasets.
+# - ExportType.MARKDOWN gives us document-level Markdown output, which is convenient because we'll handle chunking ourselves in the next lesson.
