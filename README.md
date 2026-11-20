@@ -10,7 +10,7 @@ You should be comfortable with Python functions, lists, dictionaries, imports, a
 
 You will need:
 
-- Python 3.14 or newer, as declared in `pyproject.toml`. The current `.python-version` selects 3.15.
+- Python 3.15, selected by `.python-version`. On Windows, install Microsoft C++ Build Tools with the **Desktop development with C++** workload and a Windows SDK so `uv` can build dependencies that lack Python 3.15 wheels.
 - `uv` installed and available in your terminal.
 - A Google Gemini API key and access to the model used by the examples.
 
@@ -332,7 +332,7 @@ Keeping the same database and thread ID lets the agent continue the saved conver
 | Problem | What to check |
 | --- | --- |
 | `uv` is not recognized | Install `uv` and make sure it is available on your terminal's `PATH`. |
-| Python setup fails | Check `.python-version` and `pyproject.toml`. If the selected 3.15 interpreter is unavailable, use `uv sync --locked --python 3.14` and `uv run --python 3.14 python <script-path>` with the lesson's file path. |
+| Python setup fails | Install Python 3.15, then run `uv sync --locked`. If a Windows dependency build reports a missing compiler, install the C++ Build Tools and Windows SDK described above. |
 | Imports fail | Run `uv sync --locked`, then run the lesson with `uv run python ...` from the repository root. |
 | Authentication or model request fails | Check `GOOGLE_API_KEY`, network access, API quota, and access to the `model=` value in that script. |
 | A tool example fails at `tool_calls[0]` | Inspect `response.tool_calls`; the manual example assumes the model requests a tool. |

@@ -8,7 +8,10 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "docling-ibm-models[opencv-python-headless]>=4.0.4",
+    "docling-slim[format-pdf-docling,models-local]>=2.151.1",
     "langchain>=1.4.7",
+    "langchain-docling>=3.0.0",
     "langchain-google-genai>=4.4.2",
     "langgraph>=1.2.20",
     "langgraph-checkpoint-sqlite>=3.1.3",
